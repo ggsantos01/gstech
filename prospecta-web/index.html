@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#101827" />
   <title>GSTech — Prospecção inteligente</title>
+  <script>try{var t=localStorage.getItem("prospecta_web_theme_v1");if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=t}catch(e){}</script>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -14,31 +15,36 @@
         <div class="brand-mark">GS</div>
         <div><strong>GS<span>TECH</span></strong><small>PROSPECÇÃO INTELIGENTE</small></div>
       </div>
-      <nav>
-        <a class="nav-item active" href="#buscar"><span>⌕</span> Buscar empresas</a>
-        <a class="nav-item" href="#leads"><span>▤</span> Meus potenciais clientes</a>
+      <nav aria-label="Principal">
+        <a class="nav-item active" href="#buscar"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg> Buscar empresas</a>
+        <a class="nav-item" href="#leads"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> Meus potenciais clientes</a>
+        <a class="nav-item" href="#instrucoes"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v5h1"/></svg> Instruções</a>
       </nav>
       <div class="sidebar-bottom">
+        <div class="goal">
+          <div class="goal-top"><span>Contatos de hoje</span><strong><span id="goalCount">0</span> <small>/ <span id="goalMax">25</span></small></strong></div>
+          <div class="meter"><i id="goalBar"></i></div>
+          <p>Limite recomendado para manter um ritmo humano e proteger o seu número do WhatsApp.</p>
+        </div>
         <div class="plan-tag"><span class="dot"></span> MVP gratuito</div>
-        <p>Encontre empresas, organize oportunidades e prepare sua próxima abordagem.</p>
       </div>
     </aside>
 
     <main class="main">
       <header class="topbar">
         <div>
-          <div class="eyebrow">CENTRAL DE PROSPECÇÃO</div>
-          <h1>Encontre seu próximo cliente.</h1>
-          <p>Pesquise negócios locais e descubra oportunidades para oferecer sites.</p>
+          <span class="eyebrow">Central de prospecção</span>
+          <h1>Encontre seu próximo <em>cliente</em>.</h1>
+          <p>Pesquise negócios locais, escreva uma mensagem simpática e leve uma demonstração de site já pronta.</p>
         </div>
-        <div class="avatar">PW</div>
+        <div class="top-right"><button id="themeBtn" class="icon-btn theme-btn" type="button" aria-label="Alternar modo claro/escuro">☾</button><div class="avatar">PW</div></div>
       </header>
 
       <section class="stats">
-        <article class="stat-card"><span class="stat-icon">⌕</span><div><small>Empresas encontradas</small><strong id="statFound">0</strong></div></article>
-        <article class="stat-card"><span class="stat-icon">▣</span><div><small>Salvas no painel</small><strong id="statSaved">0</strong></div></article>
-        <article class="stat-card"><span class="stat-icon">↗</span><div><small>Com telefone</small><strong id="statPhone">0</strong></div></article>
-        <article class="stat-card"><span class="stat-icon">◎</span><div><small>Sem site cadastrado</small><strong id="statNoSite">0</strong></div></article>
+        <article class="stat-card"><span class="stat-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span><div><small>Empresas encontradas</small><strong id="statFound">0</strong></div></article>
+        <article class="stat-card"><span class="stat-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg></span><div><small>Salvas no painel</small><strong id="statSaved">0</strong></div></article>
+        <article class="stat-card"><span class="stat-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span><div><small>Com telefone</small><strong id="statPhone">0</strong></div></article>
+        <article class="stat-card"><span class="stat-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span><div><small>Sem site cadastrado</small><strong id="statNoSite">0</strong></div></article>
       </section>
 
       <section class="panel search-panel" id="buscar">
@@ -50,14 +56,90 @@
           <label class="field city-field"><span>Cidade ou região</span><input id="city" list="regionList" autocomplete="off" placeholder="Ex.: Itaquera, São Paulo, SP" required /><datalist id="regionList"></datalist></label>
           <label class="field"><span>Segmento</span>
             <select id="segment">
-              <option value="serralheria">Serralherias</option>
-              <option value="barbearia">Barbearias</option>
-              <option value="oficina">Oficinas mecânicas</option>
+            <optgroup label="Alimentação e bebidas">
               <option value="restaurante">Restaurantes</option>
-              <option value="estetica">Clínicas de estética e beleza</option>
-              <option value="assistencia">Assistências técnicas</option>
-              <option value="mercado">Mercados e mercearias</option>
+              <option value="pizzaria">Pizzarias</option>
+              <option value="hamburgueria">Hamburguerias e lanchonetes</option>
+              <option value="churrascaria">Churrascarias</option>
+              <option value="japones">Culinária japonesa</option>
+              <option value="padaria">Padarias</option>
+              <option value="confeitaria">Confeitarias e doces</option>
               <option value="cafe">Cafeterias</option>
+              <option value="sorveteria">Sorveterias e açaí</option>
+              <option value="bar">Bares e botecos</option>
+              <option value="adega">Adegas e distribuidoras de bebidas</option>
+              <option value="mercado">Mercados e mercearias</option>
+              <option value="acougue">Açougues</option>
+              <option value="hortifruti">Hortifrútis e sacolões</option>
+            </optgroup>
+            <optgroup label="Beleza e bem-estar">
+              <option value="barbearia">Barbearias</option>
+              <option value="salao">Salões de beleza</option>
+              <option value="estetica">Clínicas de estética e beleza</option>
+              <option value="manicure">Manicures e esmalterias</option>
+              <option value="tatuagem">Estúdios de tatuagem</option>
+              <option value="academia">Academias</option>
+              <option value="massagem">Massagem e spas</option>
+            </optgroup>
+            <optgroup label="Automotivo">
+              <option value="oficina">Oficinas mecânicas</option>
+              <option value="autopecas">Autopeças</option>
+              <option value="lavajato">Lava-jatos</option>
+              <option value="borracharia">Borracharias</option>
+              <option value="moto">Oficinas e lojas de moto</option>
+              <option value="autoescola">Autoescolas</option>
+            </optgroup>
+            <optgroup label="Casa e construção">
+              <option value="serralheria">Serralherias</option>
+              <option value="marcenaria">Marcenarias</option>
+              <option value="vidracaria">Vidraçarias</option>
+              <option value="eletricista">Eletricistas</option>
+              <option value="encanador">Encanadores</option>
+              <option value="pintor">Pintores</option>
+              <option value="climatizacao">Ar-condicionado e refrigeração</option>
+              <option value="chaveiro">Chaveiros</option>
+              <option value="tapecaria">Tapeçarias e estofados</option>
+              <option value="materiais">Materiais de construção</option>
+              <option value="moveis">Lojas de móveis</option>
+            </optgroup>
+            <optgroup label="Comércio e varejo">
+              <option value="sexshop">Sex shops</option>
+              <option value="roupas">Lojas de roupas</option>
+              <option value="calcados">Lojas de calçados</option>
+              <option value="petshop">Pet shops</option>
+              <option value="papelaria">Papelarias</option>
+              <option value="floricultura">Floriculturas</option>
+              <option value="brinquedos">Lojas de brinquedos</option>
+              <option value="presentes">Presentes e variedades</option>
+              <option value="joalheria">Joalherias e relojoarias</option>
+              <option value="optica">Óticas</option>
+              <option value="celulares">Lojas de celulares</option>
+              <option value="farmacia">Farmácias</option>
+              <option value="perfumaria">Perfumarias e cosméticos</option>
+              <option value="lavanderia">Lavanderias</option>
+              <option value="grafica">Gráficas e copiadoras</option>
+              <option value="foto">Fotógrafos e estúdios</option>
+            </optgroup>
+            <optgroup label="Serviços e ofícios">
+              <option value="assistencia">Assistências técnicas</option>
+              <option value="costura">Costureiras e ateliês</option>
+              <option value="sapateiro">Sapateiros</option>
+              <option value="buffet">Buffets e festas</option>
+            </optgroup>
+            <optgroup label="Saúde, educação e profissionais">
+              <option value="dentista">Dentistas e odontologia</option>
+              <option value="veterinaria">Veterinárias</option>
+              <option value="fisioterapia">Fisioterapia</option>
+              <option value="psicologia">Psicólogos e terapeutas</option>
+              <option value="advocacia">Escritórios de advocacia</option>
+              <option value="contabilidade">Contabilidades</option>
+              <option value="imobiliaria">Imobiliárias</option>
+              <option value="idiomas">Escolas de idiomas e cursos</option>
+              <option value="creche">Escolinhas e creches</option>
+            </optgroup>
+            <optgroup label="Hospedagem">
+              <option value="pousada">Pousadas e hotéis</option>
+            </optgroup>
             </select>
           </label>
           <label class="field radius-field"><span>Raio de busca</span>
@@ -65,7 +147,22 @@
           </label>
           <button class="primary-btn" id="searchBtn" type="submit"><span>⌕</span> Buscar empresas</button>
         </form>
+        <div class="region-presets"><label><small>Regiões sugeridas</small><select id="regionPreset" class="lead-status-select"></select></label><small class="hint">✓ = já pesquisada. Em bairros, 5 km costuma bastar e evita repetir empresas de bairros vizinhos.</small></div>
         <div class="region-recents" id="regionRecents" hidden><small>Regiões recentes:</small><div class="chips" id="regionChips"></div></div>
+        <details class="finder" id="finder">
+          <summary><span class="fi"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span> Não achou a empresa na lista? Procure pelo nome e pela rua</summary>
+          <div class="find-body">
+            <form id="findForm" class="find-form">
+              <label class="field"><span>Nome da loja</span><input id="findName" placeholder="Ex.: Barbearia do Zé" required /></label>
+              <label class="field"><span>Rua (opcional)</span><input id="findStreet" placeholder="Ex.: Rua Principal, 120" /></label>
+              <label class="field"><span>Cidade ou bairro</span><input id="findCity" placeholder="Vazio = usa o campo acima" /></label>
+              <label class="field"><span>Segmento</span><select id="findSegment"></select></label>
+              <button class="primary-btn" id="findBtn" type="submit">Procurar</button>
+            </form>
+            <div id="findResults" class="find-results" aria-live="polite"></div>
+            <div class="find-actions"><button type="button" class="secondary-btn" id="manualOpen">＋ Cadastrar manualmente</button></div>
+          </div>
+        </details>
         <div class="notice"><span>ⓘ</span><p>Dica: informe bairro, cidade e estado (ex.: "Centro, Campinas, SP") para evitar confusão com lugares de mesmo nome. A busca usa dados públicos do OpenStreetMap. Nem todos os estabelecimentos possuem telefone, WhatsApp ou site cadastrados. Os resultados não representam uma lista completa do Google Maps.</p></div>
         <div id="searchStatus" class="search-status" aria-live="polite"></div>
       </section>
@@ -74,11 +171,17 @@
         <div class="results-header">
           <div><span class="eyebrow">SEUS RESULTADOS</span><h2 id="resultsTitle">Empresas encontradas</h2><p id="resultsSubtitle">Faça uma busca para visualizar oportunidades.</p></div>
           <div class="result-actions">
-            <input id="filterInput" class="filter-input" placeholder="Filtrar resultados..." />
-            <button id="exportBtn" class="secondary-btn" type="button">Exportar CSV ↓</button>
-            <button id="backupBtn" class="secondary-btn" type="button">Backup ↓</button>
-            <button id="restoreBtn" class="secondary-btn" type="button">Restaurar ↑</button>
-            <input id="restoreFile" type="file" accept="application/json,.json" hidden />
+            <input id="filterInput" class="filter-input" placeholder="Filtrar resultados..." aria-label="Filtrar resultados" />
+            <button id="selAllBtn" class="secondary-btn" type="button">☑ Selecionar visíveis</button>
+            <details class="more-menu" id="moreMenu"><summary>⋯ Dados</summary>
+              <div class="menu-pop">
+                <button id="exportBtn" type="button">Exportar CSV</button>
+                <button id="backupBtn" type="button">Fazer backup</button>
+                <button id="restoreBtn" type="button">Restaurar backup</button>
+                <input id="restoreFile" type="file" accept="application/json,.json" hidden />
+                <button id="wipeBtn" class="danger" type="button">Apagar todos os dados</button>
+              </div>
+            </details>
           </div>
         </div>
         <div class="chips" id="filterChips">
@@ -93,7 +196,56 @@
         </div>
       </section>
 
-      <footer>GSTech · Prospecção Web 1.1 <span>Pesquisa fornecida por OpenStreetMap contributors</span></footer>
+      <section class="panel guide" id="instrucoes">
+        <div class="section-heading"><div><span class="eyebrow">PASSO A PASSO</span><h2>Instruções: como conduzir a conversa</h2></div></div>
+        <div class="guide-list">
+          <details open><summary>1. Antes de abordar · Novo → Analisado</summary><ul>
+            <li>Confira se o selo é <b>Celular disponível</b>. Telefone fixo: use o botão Ligar.</li>
+            <li>Abra o <b>Ver no Maps</b> e veja se a empresa existe e está ativa. Procure também o Instagram e o Google, porque "sem site cadastrado" não prova que não tem site.</li>
+            <li>Clique em <b>Gerar demo</b>, publique no Netlify e confirme que o link abre. Depois salve o lead (★).</li>
+          </ul></details>
+          <details><summary>2. Primeiro contato · Contatado</summary><ul>
+            <li>Clique em <b>Abrir WhatsApp</b>, leia a mensagem e envie. Envie manualmente, uma empresa por vez, em horário comercial.</li>
+            <li>Mude a etapa para <b>Contatado</b>. A data de contato entra sozinha.</li>
+            <li>Sem resposta, espere. Passados 3 dias, o selo <b>Follow-up pendente</b> aparece: use <b>↻ Follow-up</b> <b>uma vez</b>. Se continuar sem resposta, pare.</li>
+          </ul></details>
+          <details><summary>3. A pessoa respondeu · Respondeu</summary><ul>
+            <li>Responda rápido e converse como pessoa, sem copiar e colar textos longos. Pergunte como o negócio atrai clientes hoje.</li>
+            <li>Mostre a <b>demo</b> e fale do benefício concreto: ser encontrado e passar confiança. Não prometa resultado, como "primeiro lugar no Google".</li>
+            <li><b>"Já tenho Instagram"</b> → o site complementa: reúne serviços, endereço e contato num lugar só, e aparece em buscas.</li>
+            <li><b>"Está caro" / "não tenho dinheiro"</b> → pergunte o que seria viável e proponha um escopo menor, em vez de baixar o preço do mesmo escopo.</li>
+            <li><b>"Vou pensar"</b> → combine uma data: "Posso te chamar na quinta para saber o que achou?" e anote no lead.</li>
+            <li><b>"Não tenho interesse" / "pare de enviar"</b> → agradeça em uma linha, anote e <b>nunca mais contate</b>.</li>
+          </ul></details>
+          <details><summary>4. Quer fechar · Interessado</summary><ul>
+            <li>Mude a etapa para <b>Interessado</b> e clique em <b>✔ Fechar venda</b> para pedir o material (logo, fotos, serviços, WhatsApp, redes).</li>
+            <li>Envie uma <b>proposta por escrito</b>: o que está incluído, prazo, número de ajustes, valor e forma de pagamento (sinal para começar, restante na entrega).</li>
+            <li>Só comece depois do aceite e do sinal. Registre o domínio no nome do cliente.</li>
+          </ul></details>
+          <details><summary>5. Entrega · Cliente</summary><ul>
+            <li>Use o <b>Checklist de entrega</b> do lead: material recebido, sinal pago, domínio registrado, site publicado.</li>
+            <li>Substitua os textos provisórios da demo pelo conteúdo real e confirme o WhatsApp com o responsável.</li>
+            <li>Entregue os acessos, mude a etapa para <b>Cliente</b> e ofereça manutenção mensal. Peça indicação ou depoimento, com autorização, para usar nas próximas abordagens.</li>
+          </ul></details>
+          <details><summary>Segurança jurídica · leia antes de vender</summary><ul>
+            <li><b>Abordagem:</b> envie mensagens uma a uma, em horário comercial, e use <b>Não contatar</b> para quem pedir para parar. O botão e todos os envios daquele lead ficam bloqueados. Nunca use disparo em massa: contas de WhatsApp são banidas por isso.</li>
+            <li><b>Dados dos leads:</b> são contatos comerciais públicos, tratados com base no legítimo interesse (LGPD). Guarde só o necessário e use <b>Apagar dados</b> se quiser zerar tudo. Fotos e informações pessoais de terceiros não devem ser salvas.</li>
+            <li><b>Site final:</b> o gerador exige as 4 declarações (autorização, direito sobre as fotos, ausência de avaliações e promessas falsas, contatos confirmados), valida o CNPJ e avisa sobre termos de risco. Ele inclui Privacidade, Termos, Cookies e (se marcado) Reembolso.</li>
+            <li><b>Imagens:</b> use só fotos do cliente ou com licença. Não pegue imagens do Google, do Instagram de terceiros ou de bancos sem verificar a licença.</li>
+            <li><b>Avaliações e promessas:</b> nunca invente depoimentos, notas ou resultados. Publicidade enganosa pode gerar multa e indenização.</li>
+            <li><b>Segmentos regulados:</b> advocacia, saúde, estética e farmácia têm regras próprias de publicidade. Bebidas e sex shop exigem avisos de 18+. Confira com o conselho da área.</li>
+            <li><b>Seu lado:</b> use contrato escrito e política de reembolso (botão abaixo), registre o domínio no nome do cliente e cuide da parte fiscal (MEI/CNPJ e nota fiscal).</li>
+            <li><b>Limites:</b> o app ajuda, mas não substitui um advogado nem garante conformidade. Revise tudo com um profissional.</li>
+          </ul><p style="margin:0 0 14px"><button class="secondary-btn" id="docOpen" type="button">Gerar documentos da GSTech (modelos)</button></p></details>
+          <details><summary>Regras de ouro</summary><ul>
+            <li>Nunca pressione, nunca insista depois de um "não" e sempre respeite pedidos para parar de receber mensagens.</li>
+            <li>Não invente preço, avaliações, depoimentos ou resultados. Todo dado do site precisa ser confirmado pelo dono.</li>
+            <li>Faça backup (botão <b>Backup ↓</b>) com frequência.</li>
+          </ul></details>
+        </div>
+      </section>
+
+      <footer><span>GSTech · Prospecção Web 1.4</span><span>Pesquisa fornecida por OpenStreetMap contributors</span></footer>
     </main>
   </div>
 
@@ -101,6 +253,103 @@
     <div class="dialog-head"><div><span class="eyebrow">DETALHES DA EMPRESA</span><h2 id="detailName">Empresa</h2></div><button class="icon-btn" id="closeDialog" aria-label="Fechar">×</button></div>
     <div id="detailContent"></div>
   </dialog>
+  <dialog id="siteDialog" class="detail-dialog site-dialog">
+    <div class="dialog-head"><div><span class="eyebrow">PRODUTO FINAL</span><h2>Gerar site final</h2></div><button class="icon-btn" id="siteClose" type="button" aria-label="Fechar">×</button></div>
+    <div id="sf_segnote" class="site-warn" hidden></div>
+    <form id="siteForm" class="site-grid" onsubmit="return false">
+      <label class="field"><span>Nome do negócio</span><input id="sf_name" /></label>
+      <label class="field"><span>Slogan (frase curta)</span><input id="sf_tagline" placeholder="Ex.: Atendimento de verdade, do jeito que você merece" /></label>
+      <label class="field full"><span>Sobre a empresa (um parágrafo por linha)</span><textarea id="sf_about" rows="3"></textarea></label>
+      <label class="field full"><span>Serviços ou produtos (um por linha: Nome | descrição | preço)</span><textarea id="sf_services" rows="4" placeholder="Corte masculino | Tesoura ou máquina | R$ 40"></textarea></label>
+      <label class="field full"><span>Horários (um por linha)</span><textarea id="sf_hours" rows="3" placeholder="Seg a Sex: 9h às 18h&#10;Sáb: 9h às 14h"></textarea></label>
+      <label class="field full"><span>Endereço</span><input id="sf_address" /></label>
+      <label class="field"><span>WhatsApp (confirmado pelo responsável)</span><input id="sf_whatsapp" inputmode="tel" /></label>
+      <label class="field"><span>Mensagem inicial do WhatsApp</span><input id="sf_msg" /></label>
+      <label class="field"><span>Instagram (@usuário)</span><input id="sf_instagram" /></label>
+      <label class="field"><span>Facebook (link)</span><input id="sf_facebook" /></label>
+      <label class="field"><span>Cor principal</span><input id="sf_color" type="color" /></label>
+      <label class="field"><span>Estilo</span><select id="sf_theme"><option value="light">Claro</option><option value="dark">Escuro</option></select></label>
+      <label class="field"><span>Fonte dos títulos</span><select id="sf_font"><option value="auto">Automática (pelo estilo)</option><option value="sans">Moderna</option><option value="serif">Elegante (serifada)</option></select></label>
+      <label class="field"><span>Animações</span><select id="sf_anim"><option value="on">Ativadas</option><option value="off">Desativadas</option></select></label>
+      <label class="field full"><span>Estilo do site (layout)</span><select id="sf_look"><option value="auto">Automático: adapta ao segmento e ao estabelecimento</option><option value="centro">Clássico centralizado</option><option value="split">Moderno dividido</option><option value="bold">Impactante</option><option value="menu">Cardápio elegante</option><option value="soft">Suave e arredondado</option></select></label>
+      <label class="field"><span>Logo (opcional)</span><input id="sf_logo" type="file" accept="image/*" /></label>
+      <label class="field"><span>Foto de capa (opcional)</span><input id="sf_cover" type="file" accept="image/*" /></label>
+      <label class="field full"><span>Galeria (até 6 fotos)</span><input id="sf_gallery" type="file" accept="image/*" multiple /></label>
+      <label class="field full"><span>Descrição de cada foto da galeria, para acessibilidade (uma por linha, na mesma ordem)</span><textarea id="sf_alts" rows="2" placeholder="Fachada da loja&#10;Corte sendo feito na cadeira"></textarea></label>
+      <div class="site-sub">Dados legais (obrigatórios)</div>
+      <label class="field"><span>Razão social ou nome do responsável</span><input id="sf_legal" /></label>
+      <label class="field"><span>CNPJ</span><input id="sf_cnpj" inputmode="numeric" placeholder="00.000.000/0000-00" /></label>
+      <label class="check full"><input type="checkbox" id="sf_nocnpj"> Não possui CNPJ (autônomo ou pessoa física). O site mostrará só o nome do responsável.</label>
+      <label class="field full"><span>E-mail para contato e pedidos de privacidade (LGPD)</span><input id="sf_email" type="email" /></label>
+      <label class="check full"><input type="checkbox" id="sf_distance"> O negócio vende ou contrata à distância (internet, WhatsApp). Inclui página de Troca e Reembolso.</label>
+      <label class="field full"><span>Regras próprias de troca e reembolso (opcional)</span><textarea id="sf_refund" rows="2"></textarea></label>
+      <div class="site-sub">Declarações (marque todas)</div>
+      <label class="check full"><input type="checkbox" id="sf_ok1"> Tenho autorização do responsável para usar o nome, a marca e as informações do negócio.</label>
+      <label class="check full"><input type="checkbox" id="sf_ok2"> As fotos e imagens são do cliente ou têm licença de uso. Não copiei imagens de terceiros.</label>
+      <label class="check full"><input type="checkbox" id="sf_ok3"> Não há avaliações ou depoimentos inventados, nem promessas que o negócio não possa comprovar.</label>
+      <label class="check full"><input type="checkbox" id="sf_ok4"> O WhatsApp, o e-mail e os dados legais foram confirmados pelo responsável.</label>
+    </form>
+    <p class="site-hint">As fotos são reduzidas e comprimidas automaticamente. O arquivo gerado é um único <b>index.html</b>, sem rastreadores nem scripts de terceiros: coloque numa pasta e publique no Netlify. Os textos legais são modelos e não substituem um advogado.</p>
+    <div class="detail-actions"><button class="secondary-btn" id="sitePreview" type="button">Pré-visualizar</button><button class="primary-btn" id="siteDownload" type="button">Baixar index.html</button></div>
+  </dialog>
+  <dialog id="docDialog" class="detail-dialog site-dialog">
+    <div class="dialog-head"><div><span class="eyebrow">DOCUMENTOS DA GSTECH</span><h2>Contrato, reembolso e privacidade</h2></div><button class="icon-btn" id="docClose" type="button" aria-label="Fechar">×</button></div>
+    <div class="site-grid">
+      <label class="field"><span>Razão social ou seu nome completo</span><input id="dg_legal" /></label>
+      <label class="field"><span>CNPJ (vazio se pessoa física)</span><input id="dg_cnpj" inputmode="numeric" /></label>
+      <label class="field"><span>E-mail de contato</span><input id="dg_email" type="email" /></label>
+      <label class="field"><span>Cidade/UF do foro</span><input id="dg_city" placeholder="São Paulo/SP" /></label>
+      <label class="field"><span>Sinal (%)</span><input id="dg_sinal" inputmode="numeric" /></label>
+      <label class="field"><span>Rodadas de ajuste incluídas</span><input id="dg_rounds" inputmode="numeric" /></label>
+      <label class="field"><span>Prazo de entrega (dias úteis)</span><input id="dg_days" inputmode="numeric" /></label>
+    </div>
+    <p class="site-hint">Gera um arquivo com Termos de Serviço/Contrato, Política de Reembolso e Política de Privacidade. São <b>modelos</b>: revise com um advogado antes de usar. Os valores acima são só padrões editáveis.</p>
+    <div class="detail-actions"><button class="primary-btn" id="docGen" type="button">Baixar documentos</button></div>
+  </dialog>
+  <dialog id="waDialog" class="wa-dialog" aria-labelledby="waTitle">
+    <div class="dialog-head"><div><span class="eyebrow" id="waEyebrow">Mensagem</span><h2 id="waTitle">Empresa</h2><p id="waSub"></p></div><button class="icon-btn" id="waClose" type="button" aria-label="Fechar">×</button></div>
+    <div id="waQueue" class="queue-banner" hidden><span id="waQueueText">Fila</span><div class="meter" aria-hidden="true"><i id="waQueueBar"></i></div></div>
+    <div class="wa-grid">
+      <div class="wa-form">
+        <div class="tone-chips" role="group" aria-label="Tom da mensagem">
+          <button class="tone" type="button" data-tone="amigavel" aria-pressed="true">😊 Amigável</button>
+          <button class="tone" type="button" data-tone="direto" aria-pressed="false">⚡ Direto</button>
+          <button class="tone" type="button" data-tone="formal" aria-pressed="false">🤝 Formal</button>
+          <button class="tone shuffle" type="button" id="waShuffle">↻ Outra versão</button>
+        </div>
+        <label class="field"><span>Mensagem (você pode editar)</span><textarea id="waText" rows="9"></textarea></label>
+        <div class="wa-meta"><span id="waCount">0 caracteres</span><span>Trocar o tom ou a versão refaz o texto</span></div>
+        <details class="wa-sender"><summary>Seu nome e sua empresa na mensagem</summary>
+          <div class="wa-sender-grid">
+            <label class="field"><span>Seu nome</span><input id="waName" placeholder="Ex.: João" /></label>
+            <label class="field"><span>Sua empresa</span><input id="waCompany" placeholder="GSTech" /></label>
+          </div>
+        </details>
+      </div>
+      <div class="wa-phone" role="img" aria-label="Prévia de como a mensagem aparece na conversa">
+        <div class="wa-bar"><span class="wa-avatar" id="waAvatar">E</span><div><strong id="waPName">Empresa</strong><small id="waPNum"></small></div></div>
+        <div class="wa-chat"><div class="bubble"><div id="waBubble"></div><time id="waTime"></time></div></div>
+      </div>
+    </div>
+    <div class="wa-actions">
+      <div class="wa-step" id="waStep1"><button class="wa-open" id="waOpen" type="button">Abrir WhatsApp</button><button class="secondary-btn" id="waCopy" type="button">Copiar texto</button><button class="secondary-btn" id="waSkip" type="button" hidden>Pular este</button></div>
+      <div class="wa-step" id="waStep2" hidden><p>Depois de tocar em Enviar no WhatsApp, volte aqui:</p><button class="primary-btn" id="waSent" type="button">✔ Enviei</button><button class="secondary-btn" id="waNot" type="button">Ainda não enviei</button></div>
+    </div>
+    <p class="wa-hint">O WhatsApp abre com a mensagem pronta e você só precisa tocar em Enviar. Por segurança, o app nunca envia nada sozinho: o contato só é registrado no CRM quando você confirma.</p>
+  </dialog>
+  <dialog id="manualDialog" class="detail-dialog">
+    <div class="dialog-head"><div><span class="eyebrow">Cadastro manual</span><h2>Adicionar empresa</h2></div><button class="icon-btn" id="manualClose" type="button" aria-label="Fechar">×</button></div>
+    <form id="manualForm" class="site-grid" onsubmit="return false">
+      <label class="field full"><span>Nome da empresa</span><input id="mName" /></label>
+      <label class="field full"><span>Endereço (rua, número, bairro)</span><input id="mAddress" /></label>
+      <label class="field"><span>Telefone ou WhatsApp</span><input id="mPhone" inputmode="tel" placeholder="(11) 98765-4321" /></label>
+      <label class="field"><span>Site (se tiver)</span><input id="mSite" placeholder="exemplo.com.br" /></label>
+      <label class="field full"><span>Segmento</span><select id="mSegment"></select></label>
+    </form>
+    <p class="site-hint">Use só dados comerciais públicos. Confirme se o número é de WhatsApp antes de mandar mensagem.</p>
+    <div class="detail-actions"><button class="primary-btn" id="manualSave" type="button">Adicionar e salvar</button></div>
+  </dialog>
+  <div id="selBar" class="sel-bar" role="region" aria-label="Fila de envio" hidden><span><span id="selCount">0</span> selecionado(s)</span><button id="selClear" class="secondary-btn" type="button">Limpar</button><button id="selStart" class="primary-btn" type="button">▶ Iniciar fila</button></div>
   <div id="toast" class="toast" role="status"></div>
   <script src="app.js"></script>
 </body>
